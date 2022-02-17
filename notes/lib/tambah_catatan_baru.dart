@@ -64,7 +64,7 @@ final CollectionReference ref =
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailCatatan(),
+                            builder: (context) => HomePage(),
                           ),
                         );
                       },

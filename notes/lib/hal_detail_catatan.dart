@@ -1,15 +1,18 @@
+// import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:notes/hal_edit_catatan.dart';
-import 'package:notes/main.dart';
 import 'home_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'hal_edit_catatan.dart';
 
 class DetailCatatan extends StatelessWidget {
-  const DetailCatatan({Key? key}) : super(key: key);
+  // final ref = FirebaseFirestore.instance.collection('notes');
+  final TextEditingController isi = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference notes = firestore.collection('notes');
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -33,12 +36,13 @@ class DetailCatatan extends StatelessWidget {
           IconButton(
             icon: new Icon(Icons.edit, color: Colors.blue),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditNotes(),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (_) =>
+              //         EditNote(docToEdit: snapshot.data!.docs[index]),
+              //   ),
+              // );
             },
           ),
           IconButton(
@@ -79,18 +83,25 @@ class DetailCatatan extends StatelessWidget {
         ],
       ),
       backgroundColor: Colors.blueGrey[50],
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+      body: StreamBuilder(
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {  
+          return Column(
+            children: [
+                Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-            ),
-          ),
-        ],
+              Stack(
+               children: [
+                 Text('ini adalah text')
+               ],
+              )
+            ],
+          );
+        },
       ),
     );
   }
